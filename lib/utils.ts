@@ -2,6 +2,28 @@ import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RGB, HSL } from '@/types/color';
 
+export const Fetcher = async <T,>(url: string, error?: string | null) => {
+  const host = "https://api.github.com/";
+  const res = await fetch(host + url, {
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${process.env.GITHUB_KEY}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    next: {
+      revalidate: 60
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error(error ? error : "Failed to fetch");
+  }
+
+  const data: T = await res.json();
+
+  return data;
+};
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

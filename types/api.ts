@@ -6,7 +6,8 @@ export type pullRequestType = {
     login: string;
     id: number;
     avatar_url: string;
-  }
+  };
+  number: number;
   created_at: string;
   updated_at: string;
   labels: labelType[];
@@ -18,6 +19,20 @@ export type pullRequestType = {
     }
   }
 };
+
+export type reviewType = {
+  state: reviewState;
+}
+
+export enum reviewState {
+  APPROVED = "APPROVED",
+  CHANGES_REQUESTED = "CHANGES_REQUESTED",
+  COMMENTED = "COMMENTED"
+}
+
+export type pullRequestWithReviewType = {
+  reviews: reviewType[]
+} & pullRequestType;
 
 export type labelType = {
   id: number;
