@@ -11,7 +11,7 @@ export const Fetcher = async <T,>(url: string, error?: string | null) => {
       'X-GitHub-Api-Version': '2022-11-28',
     },
     next: {
-      revalidate: 60
+      revalidate: 10
     }
   });
 

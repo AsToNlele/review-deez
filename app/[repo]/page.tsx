@@ -21,4 +21,3 @@ const RepoPage = async ({ params }: { params: { repo: string } }) => {
 };
 
 export default RepoPage;
-export const revalidate = 60;
